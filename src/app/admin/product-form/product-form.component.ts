@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../category.service';
 import { ProductService } from '../../product.service';
+import 'rxjs/add/operator/take'; // takes one object from observable and then unsubscribes
 
 @Component({
   selector: 'app-product-form',
@@ -10,13 +11,23 @@ import { ProductService } from '../../product.service';
 })
 export class ProductFormComponent implements OnInit {
   categories$;
+  product = {}; // set to non-null to avoid NullPointerException during page load
+  id;
 
-  constructor(private categoryService: CategoryService, private productService: ProductService, private router: Router) {
-    this.categories$ = categoryService.getCategories();
+  constructor(private route: ActivatedRoute, private categoryService: CategoryService, private productService: ProductService, private router: Router) {
+    this.categories$ = this.categoryService.getCategories();
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.productService.get(this.id).take(1).subscribe(p => this.product = p);
+    }
   }
 
   save(product) {
-    this.productService.create(product);
+    if (this.id) {
+      this.productService.update(this.id, product);
+    } else {
+      this.productService.create(product);
+    }
     this.router.navigate(['admin/products']);
   }
 
