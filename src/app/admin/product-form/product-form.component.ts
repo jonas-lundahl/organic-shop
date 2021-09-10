@@ -13,6 +13,7 @@ export class ProductFormComponent implements OnInit {
   categories$;
   product = {}; // set to non-null to avoid NullPointerException during page load
   id;
+  defaultProductImage = 'http://futureuniversity.com/wp-content/uploads/sites/9/2015/02/default-placeholder-1024x1024-570x321.png';
 
   constructor(private route: ActivatedRoute, private categoryService: CategoryService, private productService: ProductService, private router: Router) {
     this.categories$ = this.categoryService.getCategories();
