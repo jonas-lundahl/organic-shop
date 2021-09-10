@@ -12,10 +12,15 @@
         <label for="price">Price</label>
         <div class="input-group">
             <span class="input-group-addon">$</span>
-            <input required #price="ngModel" ngModel name="price" id="price" type="number" class="form-control">
+            <input required #price="ngModel" ngModel name="price" id="price" type="number" class="form-control" [min]="0">
         </div>
         <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
-            Price is required.
+            <div *ngIf="price.errors.required">
+                Price is required.
+            </div>
+            <div *ngIf="price.errors.min">
+                Price cannot be negative.
+            </div>
         </div>
     </div>
 
@@ -34,9 +39,14 @@
 
     <div class="form-group">
         <label for="imageUrl">Image URL</label>
-        <input required #imageUrl="ngModel" ngModel name="imageUrl" id="imageUrl" type="text" class="form-control">
+        <input required #imageUrl="ngModel" url ngModel name="imageUrl" id="imageUrl" type="text" class="form-control">
         <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
-            Image URL is required.
+            <div *ngIf="imageUrl.errors.required">
+                Image URL is required.
+            </div>
+            <div *ngIf="imageUrl.errors.url">
+                Image URL must contain a valid URL.
+            </div>
         </div>
     </div>
 
