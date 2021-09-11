@@ -16,7 +16,7 @@ export class ProductFormComponent implements OnInit {
   defaultProductImage = 'http://futureuniversity.com/wp-content/uploads/sites/9/2015/02/default-placeholder-1024x1024-570x321.png';
 
   constructor(private route: ActivatedRoute, private categoryService: CategoryService, private productService: ProductService, private router: Router) {
-    this.categories$ = this.categoryService.getCategories();
+    this.categories$ = this.categoryService.getAll();
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.productService.get(this.id).take(1).subscribe(p => this.product = p);
