@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../models/product';
+import { ShoppingCartService } from '../shopping-cart.service';
 
 @Component({
   selector: 'product-card',
@@ -11,6 +12,9 @@ export class ProductCardComponent {
   @Input('show-actions') showActions = true;
   defaultProductImage = 'http://futureuniversity.com/wp-content/uploads/sites/9/2015/02/default-placeholder-1024x1024-570x321.png';
 
-  constructor() { }
+  constructor(private cartService: ShoppingCartService) { }
 
+  addtoCart(product: Product) {
+    this.cartService.addToCart(product);
+  }
 }
