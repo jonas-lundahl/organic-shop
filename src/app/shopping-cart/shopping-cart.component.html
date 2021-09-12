@@ -20,9 +20,16 @@
                     {{ item.quantity }}
                 </td>
                 <td>
-                    {{ "TBA" }}
+                    {{ item.totalPrice | currency:'USD':true }}
                 </td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>{{ cart.totalPrice | currency:'USD':true }}</th>
+            </tr>
+        </tfoot>
     </table>
 </ng-container>
