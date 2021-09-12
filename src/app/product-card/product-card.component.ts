@@ -10,11 +10,18 @@ import { ShoppingCartService } from '../shopping-cart.service';
 export class ProductCardComponent {
   @Input('product') product: Product;
   @Input('show-actions') showActions = true;
+  @Input('shopping-cart') shoppingCart;
   defaultProductImage = 'http://futureuniversity.com/wp-content/uploads/sites/9/2015/02/default-placeholder-1024x1024-570x321.png';
 
   constructor(private cartService: ShoppingCartService) { }
 
   addtoCart(product: Product) {
     this.cartService.addToCart(product);
+  }
+
+  getQuantity() {
+    if (!this.shoppingCart) return 0;
+    let item = this.shoppingCart.items[this.product.$key];
+    return item ? item.quantity : 0;
   }
 }
