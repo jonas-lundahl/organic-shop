@@ -8,10 +8,8 @@ export class ShoppingCart {
         this.itemsMap = itemsMap || {}; // make sure itemsMap is never undefined 
         for (let productId in this.itemsMap) {
             let item = itemsMap[productId];
-            let x = new ShoppingCartItem();
-            Object.assign(x, item);
-            x.$key = productId;
-            this.items.push(x);
+            // ...item === iterate over all properties of item and add to object
+            this.items.push(new ShoppingCartItem({ ...item, $key: productId, }));
         }
     }
 
@@ -33,8 +31,8 @@ export class ShoppingCart {
 
     getQuantity(product: Product) {
         console.log(product);
-        
+
         let item = this.itemsMap[product.$key];
         return item ? item.quantity : 0;
-      }
+    }
 }
