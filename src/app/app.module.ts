@@ -12,6 +12,7 @@ import { AuthGuard } from 'shared/services/auth-guard.service';
 import { SharedModule } from 'shared/shared.module';
 
 import { environment } from './../environments/environment';
+import { AdminModule } from './admin/admin.module';
 import { AdminOrdersComponent } from './admin/components/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './admin/components/admin-products/admin-products.component';
 import { ProductFormComponent } from './admin/components/product-form/product-form.component';
@@ -40,9 +41,6 @@ import { ShoppingCartComponent } from './shopping/components/shopping-cart/shopp
     LoginComponent,
     OrderSuccessComponent,
     MyOrdersComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
-    ProductFormComponent,
     ProductFilterComponent,
     ShoppingCartSummaryComponent,
     ShippingFormComponent
@@ -50,6 +48,7 @@ import { ShoppingCartComponent } from './shopping/components/shopping-cart/shopp
   imports: [
     BrowserModule,
     SharedModule,
+    AdminModule,
     FormsModule,
     DataTableModule,
     CustomFormsModule,
@@ -66,17 +65,9 @@ import { ShoppingCartComponent } from './shopping/components/shopping-cart/shopp
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuard] },
       { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
-
-      // Order matters! Put most specific routes first.
-      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     ])
   ],
-  providers: [
-    AdminAuthGuard,
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
