@@ -1,5 +1,15 @@
 {
     "hosting": {
-        "public": "dist"
+        "site": "oshop-f3ddd",
+        "public": "dist",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "rewrites": [{
+            "source": "**",
+            "destination": "/index.html"
+        }]
     }
 }
