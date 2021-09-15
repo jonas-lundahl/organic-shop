@@ -13,23 +13,19 @@ import { SharedModule } from 'shared/shared.module';
 import { environment } from './../environments/environment';
 import { AdminModule } from './admin/admin.module';
 import { AppComponent } from './app.component';
-import { BsNavbarComponent } from './core/components/bs-navbar/bs-navbar.component';
-import { HomeComponent } from './core/components/home/home.component';
 import { LoginComponent } from './core/components/login/login.component';
-import { ProductFilterComponent } from './shopping/components/products/product-filter/product-filter.component';
+import { CoreModule } from './core/core.module';
 import { ProductsComponent } from './shopping/components/products/products.component';
 import { ShoppingModule } from './shopping/shopping.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BsNavbarComponent,
-    HomeComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,
     SharedModule,
+    CoreModule,
     ShoppingModule,
     AdminModule,
     FormsModule,
